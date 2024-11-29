@@ -1,14 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gestion des Recettes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        form,
+        .recipes-list,
+        .recipe-item {
+            margin: 20px 0;
+        }
+
+        .recipe-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea,
+        select,
+        button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+        }
+    </style>
 </head>
 
 <body>
-    gros pd
+    <header>
+        <h1>Gestion des Recettes</h1>
+    </header>
+
+    <!-- Formulaire pour créer ou modifier une recette -->
+    <section>
+        <h2>Ajouter ou Modifier une Recette</h2>
+        <form id="recipe-form">
+            <input type="hidden" id="recipe-id" name="recipe-id">
+            <div class="form-group">
+                <label for="title">Titre</label>
+                <input type="text" id="title" name="title" placeholder="Titre de la recette" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Courte description de la recette"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="ingredients">Ingrédients</label>
+                <textarea id="ingredients" name="ingredients"
+                    placeholder="Liste des ingrédients, séparés par des virgules"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="steps">Étapes de préparation</label>
+                <textarea id="steps" name="steps" placeholder="Étapes pour préparer la recette"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="duration">Durée (en minutes)</label>
+                <input type="number" id="duration" name="duration" placeholder="Durée de la recette" min="1">
+            </div>
+            <div class="form-group">
+                <label for="difficulty">Difficulté</label>
+                <select id="difficulty" name="difficulty">
+                    <option value="facile">Facile</option>
+                    <option value="moyen">Moyen</option>
+                    <option value="difficile">Difficile</option>
+                </select>
+            </div>
+            <button type="submit">Enregistrer la recette</button>
+        </form>
+    </section>
+
+    <!-- Recherche de recettes -->
+    <section>
+        <h2>Rechercher des Recettes</h2>
+        <input type="text" id="search" placeholder="Rechercher par mot-clé">
+    </section>
+
+    <!-- Liste des recettes -->
+    <section>
+        <h2>Liste des Recettes</h2>
+        <div class="recipes-list" id="recipes-list">
+            <!-- Les recettes seront affichées ici -->
+        </div>
+    </section>
+
+    <script>
+        const recipes = []; // Liste des recettes (en mémoire)
+
+        // Ajouter ou modifier une recette
+        document.getElementById('recipe-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const id = document.getElementById('recipe-id').value;
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const ingredients = document.getElementById('ingredients').value;
+            const steps = document.getElementById('steps').value;
+            const duration = document.getElementById('duration').value;
+            const difficulty = document.getElementById('difficulty').value;
+
+            if (id) {
+                // Modifier une recette existante
+                const recipe = recipes.find(r => r.id === id);
+                if (recipe) {
+                    recipe.title = title;
+                    recipe.description = description;
+                    recipe.ingredients = ingredients;
+                    recipe.steps = steps;
+                    recipe.duration = duration;
+                    recipe.difficulty = difficulty;
+                }
+            } else {
+                // Ajouter une nouvelle recette
+                recipes.push({
+                    id: Date.now().toString(),
+                    title,
+                    description,
+                    ingredients,
+                    steps,
+                    duration,
+                    difficulty
+                });
+            }
+
+            resetForm();
+            displayRecipes();
+        });
+
+        // Réinitialiser le formulaire
+        function resetForm() {
+            document.getElementById('recipe-form').reset();
+            document.getElementById('recipe-id').value = '';
+        }
+
+        // Afficher la liste des recettes
+        function displayRecipes() {
+            const list = document.getElementById('recipes-list');
+            list.innerHTML = '';
+
+            recipes.forEach(recipe => {
+                const div = document.createElement('div');
+                div.className = 'recipe-item';
+                div.innerHTML = `
+                    <h3>${recipe.title}</h3>
+                    <p><strong>Description :</strong> ${recipe.description}</p>
+                    <p><strong>Ingrédients :</strong> ${recipe.ingredients}</p>
+                    <p><strong>Étapes :</strong> ${recipe.steps}</p>
+                    <p><strong>Durée :</strong> ${recipe.duration} min</p>
+                    <p><strong>Difficulté :</strong> ${recipe.difficulty}</p>
+                    <button onclick="editRecipe('${recipe.id}')">Modifier</button>
+                    <button onclick="deleteRecipe('${recipe.id}')">Supprimer</button>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        // Modifier une recette
+        function editRecipe(id) {
+            const recipe = recipes.find(r => r.id === id);
+            if (recipe) {
+                document.getElementById('recipe-id').value = recipe.id;
+                document.getElementById('title').value = recipe.title;
+                document.getElementById('description').value = recipe.description;
+                document.getElementById('ingredients').value = recipe.ingredients;
+                document.getElementById('steps').value = recipe.steps;
+                document.getElementById('duration').value = recipe.duration;
+                document.getElementById('difficulty').value = recipe.difficulty;
+            }
+        }
+
+        // Supprimer une recette
+        function deleteRecipe(id) {
+            if (confirm('Voulez-vous vraiment supprimer cette recette ?')) {
+                const index = recipes.findIndex(r => r.id === id);
+                if (index !== -1) recipes.splice(index, 1);
+                displayRecipes();
+            }
+        }
+    </script>
 </body>
 
 </html>
