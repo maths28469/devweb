@@ -1,59 +1,126 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Recettes</title>
+    <title>Cuistolib.fr</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
         }
 
         header {
+            background: #ff6b6b;
+            color: white;
+            padding: 20px;
             text-align: center;
-            padding: 10px 0;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
-        form,
-        .recipes-list,
-        .recipe-item {
-            margin: 20px 0;
+        section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .recipe-item {
-            border: 1px solid #f8f8f8;
-            padding: 10px;
-            margin-bottom: 10px;
+        h2 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff6b6b;
         }
 
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
 
-        input,
-        textarea,
-        select,
-        button {
+        input, textarea, select {
             width: 100%;
             padding: 8px;
-            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            min-height: 100px;
+        }
+
+        button {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff5252;
+        }
+
+        #search {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+        }
+
+        .recipes-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .recipe-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .recipe-item h3 {
+            color: #ff6b6b;
+            margin-top: 0;
+        }
+
+        .recipe-item button {
+            margin-right: 10px;
+        }
+
+        .recipe-item button:last-child {
+            background-color: #ff4444;
+        }
+
+        @media (max-width: 600px) {
+            .recipes-list {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 10px;
+            }
         }
     </style>
 </head>
-
 <body>
     <header>
-        <h1>Gestion des Recettes</h1>
+        <h1>Cuistolib</h1>
     </header>
 
-    <!-- Formulaire pour créer ou modifier une recette -->
     <section>
         <h2>Ajouter ou Modifier une Recette</h2>
         <form id="recipe-form">
@@ -68,8 +135,7 @@
             </div>
             <div class="form-group">
                 <label for="ingredients">Ingrédients</label>
-                <textarea id="ingredients" name="ingredients"
-                    placeholder="Liste des ingrédients, séparés par des virgules"></textarea>
+                <textarea id="ingredients" name="ingredients" placeholder="Liste des ingrédients, séparés par des virgules"></textarea>
             </div>
             <div class="form-group">
                 <label for="steps">Étapes de préparation</label>
@@ -91,13 +157,11 @@
         </form>
     </section>
 
-    <!-- Recherche de recettes -->
     <section>
         <h2>Rechercher des Recettes</h2>
         <input type="text" id="search" placeholder="Rechercher par mot-clé">
     </section>
 
-    <!-- Liste des recettes -->
     <section>
         <h2>Liste des Recettes</h2>
         <div class="recipes-list" id="recipes-list">
@@ -106,10 +170,9 @@
     </section>
 
     <script>
-        const recipes = []; // Liste des recettes (en mémoire)
+        const recipes = [];
 
-        // Ajouter ou modifier une recette
-        document.getElementById('recipe-form').addEventListener('submit', function (e) {
+        document.getElementById('recipe-form').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const id = document.getElementById('recipe-id').value;
@@ -121,7 +184,6 @@
             const difficulty = document.getElementById('difficulty').value;
 
             if (id) {
-                // Modifier une recette existante
                 const recipe = recipes.find(r => r.id === id);
                 if (recipe) {
                     recipe.title = title;
@@ -132,7 +194,6 @@
                     recipe.difficulty = difficulty;
                 }
             } else {
-                // Ajouter une nouvelle recette
                 recipes.push({
                     id: Date.now().toString(),
                     title,
@@ -148,13 +209,11 @@
             displayRecipes();
         });
 
-        // Réinitialiser le formulaire
         function resetForm() {
             document.getElementById('recipe-form').reset();
             document.getElementById('recipe-id').value = '';
         }
 
-        // Afficher la liste des recettes
         function displayRecipes() {
             const list = document.getElementById('recipes-list');
             list.innerHTML = '';
@@ -176,7 +235,6 @@
             });
         }
 
-        // Modifier une recette
         function editRecipe(id) {
             const recipe = recipes.find(r => r.id === id);
             if (recipe) {
@@ -190,7 +248,6 @@
             }
         }
 
-        // Supprimer une recette
         function deleteRecipe(id) {
             if (confirm('Voulez-vous vraiment supprimer cette recette ?')) {
                 const index = recipes.findIndex(r => r.id === id);
@@ -200,5 +257,4 @@
         }
     </script>
 </body>
-
 </html>
