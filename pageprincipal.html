@@ -14,12 +14,15 @@
         }
 
         header {
-            background: #ff6b6b;
+            background: linear-gradient(rgba(255, 107, 107, 0.265), rgba(255, 107, 107, 0.5)), url('https://www.cuisined1jour.fr/wp-content/uploads/2020/10/Cuisine-d01.jpg039un-jour-Traiteur-Plat-du-jour-01.jpg');
+            background-size: cover;
+            background-position: center;
             color: white;
-            padding: 20px;
+            padding: 40px;
             text-align: center;
             border-radius: 10px;
             margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         section {
@@ -55,6 +58,11 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            padding: 0;
+            border: none;
         }
 
         textarea {
@@ -108,6 +116,20 @@
             background-color: #ff4444;
         }
 
+        .recipe-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .image-preview {
+            max-width: 300px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
         @media (max-width: 600px) {
             .recipes-list {
                 grid-template-columns: 1fr;
@@ -147,6 +169,11 @@
         <h2>Ajouter ou Modifier une Recette</h2>
         <form id="recipe-form">
             <input type="hidden" id="recipe-id" name="recipe-id">
+            <div class="form-group">
+                <label for="photo">Photo de la recette</label>
+                <input type="file" id="photo" name="photo" accept="image/*">
+                <img id="image-preview" class="image-preview" style="display: none;">
+            </div>
             <div class="form-group">
                 <label for="title">Titre</label>
                 <input type="text" id="title" name="title" placeholder="Titre de la recette" required>
@@ -205,6 +232,8 @@
             const steps = document.getElementById('steps').value;
             const duration = document.getElementById('duration').value;
             const difficulty = document.getElementById('difficulty').value;
+            const imagePreview = document.getElementById('image-preview');
+            const image = imagePreview.style.display !== 'none' ? imagePreview.src : null;
 
             if (id) {
                 const recipe = recipes.find(r => r.id === id);
@@ -215,6 +244,7 @@
                     recipe.steps = steps;
                     recipe.duration = duration;
                     recipe.difficulty = difficulty;
+                    if (image) recipe.image = image;
                 }
             } else {
                 recipes.push({
@@ -224,7 +254,8 @@
                     ingredients,
                     steps,
                     duration,
-                    difficulty
+                    difficulty,
+                    image
                 });
             }
 
@@ -235,6 +266,7 @@
         function resetForm() {
             document.getElementById('recipe-form').reset();
             document.getElementById('recipe-id').value = '';
+            document.getElementById('image-preview').style.display = 'none';
         }
 
         function displayRecipes() {
@@ -245,6 +277,7 @@
                 const div = document.createElement('div');
                 div.className = 'recipe-item';
                 div.innerHTML = `
+                    ${recipe.image ? `<img src="${recipe.image}" class="recipe-image" alt="${recipe.title}">` : ''}
                     <h3>${recipe.title}</h3>
                     <p><strong>Description :</strong> ${recipe.description}</p>
                     <p><strong>Ingrédients :</strong> ${recipe.ingredients}</p>
@@ -268,6 +301,10 @@
                 document.getElementById('steps').value = recipe.steps;
                 document.getElementById('duration').value = recipe.duration;
                 document.getElementById('difficulty').value = recipe.difficulty;
+                if (recipe.image) {
+                    document.getElementById('image-preview').src = recipe.image;
+                    document.getElementById('image-preview').style.display = 'block';
+                }
             }
         }
 
