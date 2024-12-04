@@ -1,3 +1,4 @@
+//1 ere version
 CREATE TABLE Utilisateur (
     id_utilisateur INT PRIMARY KEY,
     nom VARCHAR(100),
@@ -33,3 +34,22 @@ ALTER TABLE utilisateur
 ADD COLUMN photo varchar(3000);
 ALTER TABLE Recette 
 ADD COLUMN urlimage varchar(3000);
+//2eme version
+
+CREATE TABLE Utilisateur (
+    id_utilisateur INT PRIMARY KEY,
+    nom VARCHAR(100),
+    email VARCHAR(100),
+    mot_de_passe VARCHAR(100)
+);
+CREATE TABLE Recette (
+    id_recette INT PRIMARY KEY,
+    nom_recette VARCHAR(100),
+    description VARCHAR(3000),
+    categorie VARCHAR(100),
+    temps_preparation DATE,
+    photo VARCHAR(1000),
+    difficulte VARCHAR(100),
+    id_utilisateur INT,
+    FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur)
+);
