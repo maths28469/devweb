@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajout Recettes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+
+        header {
+            background: linear-gradient(rgba(255, 107, 107, 0.265), rgba(255, 107, 107, 0.5)), url('https://www.cuisined1jour.fr/wp-content/uploads/2020/10/Cuisine-d01.jpg039un-jour-Traiteur-Plat-du-jour-01.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff6b6b;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            padding: 0;
+            border: none;
+        }
+
+        textarea {
+            min-height: 100px;
+        }
+
+        button {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff5252;
+        }
+
+        #search {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+        }
+
+        .recipes-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .recipe-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .recipe-item h3 {
+            color: #ff6b6b;
+            margin-top: 0;
+        }
+
+        .recipe-item button {
+            margin-right: 10px;
+        }
+
+        .recipe-item button:last-child {
+            background-color: #ff4444;
+        }
+
+        .recipe-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .image-preview {
+            max-width: 300px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .recipes-list {
+                grid-template-columns: 1fr;
+            }
+
+            body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Ajouter une Recette</h2>
+    <form id="recipe-form">
+        <input type="hidden" id="recipe-id" name="recipe-id">
+        <div class="form-group">
+            <label for="photo">Photo de la recette</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+            <img id="image-preview" class="image-preview" style="display: none;">
+        </div>
+        <div class="form-group">
+            <label for="title">Titre</label>
+            <input type="text" id="title" name="title" placeholder="Titre de la recette" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Courte description de la recette"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="ingredients">Ingrédients</label>
+            <textarea id="ingredients" name="ingredients"
+                placeholder="Liste des ingrédients, séparés par des virgules"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="steps">Étapes de préparation</label>
+            <textarea id="steps" name="steps" placeholder="Étapes pour préparer la recette"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="duration">Durée (en minutes)</label>
+            <input type="number" id="duration" name="duration" placeholder="Durée de la recette" min="1">
+        </div>
+        <div class="form-group">
+            <label for="difficulty">Difficulté</label>
+            <select id="difficulty" name="difficulty">
+                <option value="facile">Facile</option>
+                <option value="moyen">Moyen</option>
+                <option value="difficile">Difficile</option>
+            </select>
+        </div>
+        <button type="submit">Enregistrer la recette</button>
+    </form>
+    </section>
+
+</body>
+
+</html>
