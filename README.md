@@ -20,6 +20,7 @@ Cuistolib est un site qui permet aux utilisateurs de consulter, ajouter, modifie
 
 #### Fonctionnalitées Implémentées 
 
+0. Création et conception de la base de donnée
 1. Gestion des recettes (CRUD complet)
 •	Créer une recette :
 o	Un formulaire pour ajouter une recette avec les champs : titre, description, liste d’ingrédients (texte libre), étapes de préparation, durée, et difficulté (facile, moyen, difficile).
@@ -50,7 +51,7 @@ o	Supprimer son compte.
  
 2. formulaireCreeRecettes : page ou l'on peut rajouter des recettes
 
-3.
+3.base de donné qui est la base de donné de notre page web
 
 4. 
 
