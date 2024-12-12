@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recherche de Recettes</title>
+    <script>
+        async function fetchRecettes() {
+            const search = document.getElementById('search').value;
+            const categorie = document.getElementById('categorie').value;
+            const difficulte = document.getElementById('difficulte').value;
+
+            const response = await fetch(`http://localhost:3000/api/recettes/filtre?search=${search}&categorie=${categorie}&difficulte=${difficulte}`);
+            const data = await response.json();
+
+            const results = document.getElementById('results');
+            results.innerHTML = '';
+            data.forEach(recette => {
+                const item = document.createElement('div');
+                item.innerHTML = `
+                    <h3>${recette.nom_recette}</h3>
+                    <p>${recette.description}</p>
+                    <p><strong>Catégorie :</strong> ${recette.categorie}</p>
+                    <p><strong>Difficulté :</strong> ${recette.difficulte}</p>
+                `;
+                results.appendChild(item);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Recherche de Recettes</h1>
+    <div>
+        <input type="text" id="search" placeholder="Rechercher une recette">
+        <select id="categorie">
+            <option value="">Toutes catégories</option>
+            <option value="une entree">Entrée</option>
+            <option value="un plat">Plat</option>
+            <option value="desset">Dessert</option>
+        </select>
+        <select id="difficulte">
+            <option value="">Toutes difficultés</option>
+            <option value="facile">Facile</option>
+            <option value="normale">Normale</option>
+            <option value="difficile">Difficile</option>
+        </select>
+        <button onclick="fetchRecettes()">Rechercher</button>
+    </div>
+    <div id="results"></div>
+</body>
+
+</html>
