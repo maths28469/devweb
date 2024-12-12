@@ -2,44 +2,58 @@
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuistolib.fr</title>
+    <meta charset="UTF-8"> <!-- Définit l'encodage des caractères en UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Assure une mise en page responsive -->
+    <title>Cuistolib.fr</title> <!-- Titre de la page affiché dans l'onglet du navigateur -->
     <style>
+        /* Styles globaux pour la mise en page */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
             background-color: #f5f7fa;
+            /* Fond gris clair */
         }
 
+        /* Style de l'en-tête avec une image d'arrière-plan */
         header {
-            background: linear-gradient(rgba(255, 107, 107, 0.265), rgba(255, 107, 107, 0.5)), url('https://www.cuisined1jour.fr/wp-content/uploads/2020/10/Cuisine-d01.jpg039un-jour-Traiteur-Plat-du-jour-01.jpg');
+            background: linear-gradient(rgba(255, 107, 107, 0.265), rgba(255, 107, 107, 0.5)),
+                url('https://www.cuisined1jour.fr/wp-content/uploads/2020/10/Cuisine-d01.jpg039un-jour-Traiteur-Plat-du-jour-01.jpg');
             background-size: cover;
+            /* L'image couvre toute la zone */
             background-position: center;
+            /* Centre l'image */
             color: white;
             padding: 40px;
             text-align: center;
+            /* Centrer le texte */
             border-radius: 10px;
+            /* Coins arrondis */
             margin-bottom: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            /* Ombre légère */
         }
 
+        /* Style des sections */
         section {
             background: white;
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Ombre pour effet de relief */
         }
 
+        /* Titre principal des sections */
         h2 {
             color: #ff6b6b;
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid #ff6b6b;
+            /* Ligne de séparation sous le titre */
         }
 
+        /* Styles pour les formulaires */
         .form-group {
             margin-bottom: 15px;
         }
@@ -54,10 +68,14 @@
         textarea,
         select {
             width: 100%;
+            /* S'étend sur toute la largeur */
             padding: 8px;
             border: 1px solid #ddd;
+            /* Bordure grise claire */
             border-radius: 4px;
+            /* Coins arrondis */
             box-sizing: border-box;
+            /* Inclut les bordures dans la largeur totale */
         }
 
         input[type="file"] {
@@ -67,8 +85,10 @@
 
         textarea {
             min-height: 100px;
+            /* Hauteur minimale pour les zones de texte */
         }
 
+        /* Boutons stylisés */
         button {
             background-color: #ff6b6b;
             color: white;
@@ -76,12 +96,15 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            /* Change le curseur en pointeur */
         }
 
         button:hover {
             background-color: #ff5252;
+            /* Couleur plus foncée au survol */
         }
 
+        /* Champ de recherche avec des coins arrondis */
         #search {
             width: 100%;
             padding: 10px;
@@ -90,12 +113,16 @@
             border-radius: 20px;
         }
 
+        /* Grille pour lister les recettes */
         .recipes-list {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            /* Colonnes adaptatives */
             gap: 20px;
+            /* Espacement entre les recettes */
         }
 
+        /* Style des cartes de recette */
         .recipe-item {
             background: white;
             padding: 15px;
@@ -106,33 +133,42 @@
         .recipe-item h3 {
             color: #ff6b6b;
             margin-top: 0;
+            /* Supprime la marge supérieure */
         }
 
         .recipe-item button {
             margin-right: 10px;
+            /* Espacement entre les boutons */
         }
 
         .recipe-item button:last-child {
             background-color: #ff4444;
+            /* Couleur différente pour le bouton Supprimer */
         }
 
+        /* Image des recettes */
         .recipe-image {
             width: 100%;
             height: 200px;
+            /* Hauteur fixe */
             object-fit: cover;
+            /* Recadre l'image pour la couvrir */
             border-radius: 8px;
             margin-bottom: 10px;
         }
 
+        /* Style des aperçus d'image */
         .image-preview {
             max-width: 300px;
             margin: 10px 0;
             border-radius: 4px;
         }
 
+        /* Styles pour les petits écrans */
         @media (max-width: 600px) {
             .recipes-list {
                 grid-template-columns: 1fr;
+                /* Une seule colonne */
             }
 
             body {
@@ -143,65 +179,71 @@
 </head>
 
 <body>
+    <!-- En-tête du site -->
     <header>
-        <h1>Cuistolib</h1>
+        <h1>Cuistolib</h1> <!-- Nom du site -->
     </header>
 
+    <!-- Bouton pour rediriger vers la création de recettes -->
     <div style="text-align: right; margin-bottom: 20px;">
         <button onclick="window.location.href='formulaireCreeRecettes.html'"
             style="background-color: #ff6b6b; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Créer
             une recette</button>
     </div>
 
+    <!-- Section de recherche -->
     <section>
         <h2>Rechercher des Recettes</h2>
         <input type="text" id="search" placeholder="Rechercher par mot-clé">
     </section>
 
+    <!-- Liste des recettes -->
     <section>
         <h2>Liste des Recettes</h2>
-        <div class="recipes-list" id="recipes-list">
-        </div>
+        <div class="recipes-list" id="recipes-list"></div>
     </section>
 
     <script>
-        const recipes = [];
+        const recipes = []; // Tableau pour stocker les recettes
 
+        // Fonction pour afficher les recettes
         function displayRecipes() {
             const list = document.getElementById('recipes-list');
-            list.innerHTML = '';
+            list.innerHTML = ''; // Vide la liste actuelle
 
             recipes.forEach(recipe => {
                 const div = document.createElement('div');
-                div.className = 'recipe-item';
+                div.className = 'recipe-item'; // Classe pour le style des recettes
                 div.innerHTML = `
-                    ${recipe.image ? `<img src="${recipe.image}" class="recipe-image" alt="${recipe.title}">` : ''}
+                    ${recipe.image ? `<img src="${recipe.image}" class="recipe-image" alt="${recipe.title}">` : ''} <!-- Affiche une image si disponible -->
                     <h3>${recipe.title}</h3>
                     <p><strong>Description :</strong> ${recipe.description}</p>
                     <p><strong>Ingrédients :</strong> ${recipe.ingredients}</p>
                     <p><strong>Étapes :</strong> ${recipe.steps}</p>
                     <p><strong>Durée :</strong> ${recipe.duration} min</p>
                     <p><strong>Difficulté :</strong> ${recipe.difficulty}</p>
-                    <button onclick="editRecipe('${recipe.id}')">Modifier</button>
-                    <button onclick="deleteRecipe('${recipe.id}')">Supprimer</button>
+                    <button onclick="editRecipe('${recipe.id}')">Modifier</button> <!-- Bouton Modifier -->
+                    <button onclick="deleteRecipe('${recipe.id}')">Supprimer</button> <!-- Bouton Supprimer -->
                 `;
-                list.appendChild(div);
+                list.appendChild(div); // Ajoute la recette à la liste
             });
         }
 
+        // Fonction pour supprimer une recette
         function deleteRecipe(id) {
-            if (confirm('Voulez-vous vraiment supprimer cette recette ?')) {
-                const index = recipes.findIndex(r => r.id === id);
-                if (index !== -1) recipes.splice(index, 1);
-                displayRecipes();
+            if (confirm('Voulez-vous vraiment supprimer cette recette ?')) { // Demande de confirmation
+                const index = recipes.findIndex(r => r.id === id); // Trouve l'index de la recette
+                if (index !== -1) recipes.splice(index, 1); // Supprime la recette si elle existe
+                displayRecipes(); // Rafraîchit l'affichage
             }
         }
 
+        // Fonction pour modifier une recette
         function editRecipe(id) {
-            window.location.href = `create.html?id=${id}`;
+            window.location.href = `create.html?id=${id}`; // Redirige vers la page d'édition avec l'ID
         }
 
-        displayRecipes();
+        displayRecipes(); // Initialise l'affichage des recettes
     </script>
 </body>
 
