@@ -47,15 +47,17 @@ o	Supprimer son compte.
 
 ##### Explications des fichiers 
 
+0. base de données qui est utilisé par notre serveur
+
 1. pageprincipale.html : page mere du site
  
 2. formulaireCreeRecettes : page ou l'on peut rajouter des recettes
 
-3.base de donné qui est la base de donné de notre page web
+3. style.css : pour epurer la page html tout en ayant le bon style sur notre pageprincipale.html
 
-4. 
+4. backend.js : coté serveur 
 
-5. 
+5. front.js : coté interface utilisateur
 6. 
 7. 
 
