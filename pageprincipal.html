@@ -34,48 +34,77 @@
     </section>
 
     <script>
-        const recipes = []; // Tableau pour stocker les recettes
+        async function fetchRecipes() {
+            const response = await fetch('http://localhost:3000/api/recipes'); // Requête pour obtenir les recettes
+            const data = await response.json();
 
-        // Fonction pour afficher les recettes
-        function displayRecipes() {
             const list = document.getElementById('recipes-list');
             list.innerHTML = ''; // Vide la liste actuelle
 
-            recipes.forEach(recipe => {
+            data.forEach(recipe => {
                 const div = document.createElement('div');
-                div.className = 'recipe-item'; // Classe pour le style des recettes
+                div.className = 'recipe-item';
                 div.innerHTML = `
-                    ${recipe.image ? `<img src="${recipe.image}" class="recipe-image" alt="${recipe.title}">` : ''} <!-- Affiche une image si disponible -->
+                    ${recipe.image ? `<img src="${recipe.image}" class="recipe-image" alt="${recipe.title}">` : ''}
                     <h3>${recipe.title}</h3>
                     <p><strong>Description :</strong> ${recipe.description}</p>
                     <p><strong>Ingrédients :</strong> ${recipe.ingredients}</p>
                     <p><strong>Étapes :</strong> ${recipe.steps}</p>
                     <p><strong>Durée :</strong> ${recipe.duration} min</p>
                     <p><strong>Difficulté :</strong> ${recipe.difficulty}</p>
-                    <button onclick="editRecipe('${recipe.id}')">Modifier</button> <!-- Bouton Modifier -->
-                    <button onclick="deleteRecipe('${recipe.id}')">Supprimer</button> <!-- Bouton Supprimer -->
                 `;
-                list.appendChild(div); // Ajoute la recette à la liste
+                list.appendChild(div); // Ajoute chaque recette à la liste
             });
         }
 
-        // Fonction pour supprimer une recette
-        function deleteRecipe(id) {
-            if (confirm('Voulez-vous vraiment supprimer cette recette ?')) { // Demande de confirmation
-                const index = recipes.findIndex(r => r.id === id); // Trouve l'index de la recette
-                if (index !== -1) recipes.splice(index, 1); // Supprime la recette si elle existe
-                displayRecipes(); // Rafraîchit l'affichage
-            }
-        }
-
-        // Fonction pour modifier une recette
-        function editRecipe(id) {
-            window.location.href = `create.html?id=${id}`; // Redirige vers la page d'édition avec l'ID
-        }
-
-        displayRecipes(); // Initialise l'affichage des recettes
+        fetchRecipes(); // Appel initial pour charger les recettes
     </script>
+
+
 
 </body>
 
 </html>
+
+<!-- <script>
+    const recipes = []; // Tableau pour stocker les recettes
+
+    // Fonction pour afficher les recettes
+    function displayRecipes() {
+        const list = document.getElementById('recipes-list');
+        list.innerHTML = ''; // Vide la liste actuelle
+
+        recipes.forEach(recipe => {
+            const div = document.createElement('div');
+            div.className = 'recipe-item'; // Classe pour le style des recettes
+            div.innerHTML = 
+                ${recipe.image ? <img src="${recipe.image}" class="recipe-image" alt="${recipe.title}"> : ''} 
+                <h3>${recipe.title}</h3>
+                <p><strong>Description :</strong> ${recipe.description}</p>
+                <p><strong>Ingrédients :</strong> ${recipe.ingredients}</p>
+                <p><strong>Étapes :</strong> ${recipe.steps}</p>
+                <p><strong>Durée :</strong> ${recipe.duration} min</p>
+                <p><strong>Difficulté :</strong> ${recipe.difficulty}</p>
+                <button onclick="editRecipe('${recipe.id}')">Modifier</button> 
+                <button onclick="deleteRecipe('${recipe.id}')">Supprimer</button> 
+            ;
+            list.appendChild(div); // Ajoute la recette à la liste
+        });
+    }
+
+    // Fonction pour supprimer une recette
+    function deleteRecipe(id) {
+        if (confirm('Voulez-vous vraiment supprimer cette recette ?')) { // Demande de confirmation
+            const index = recipes.findIndex(r => r.id === id); // Trouve l'index de la recette
+            if (index !== -1) recipes.splice(index, 1); // Supprime la recette si elle existe
+            displayRecipes(); // Rafraîchit l'affichage
+        }
+    }
+
+    // Fonction pour modifier une recette
+    function editRecipe(id) {
+        window.location.href = create.html?id=${id}; // Redirige vers la page d'édition avec l'ID
+    }
+
+    displayRecipes(); // Initialise l'affichage des recettes
+</script> -->

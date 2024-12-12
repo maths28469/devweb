@@ -13,7 +13,7 @@ app.use(cors());
 let recipes = [];
 
 // Créer une recette
-app.post('/recipes', (req, res) => {
+app.post('api/recipes', (req, res) => {
     const { title, description, ingredients, steps, duration, difficulty } = req.body;
     const id = Date.now().toString();
     const recipe = { id, title, description, ingredients, steps, duration, difficulty };
@@ -22,19 +22,19 @@ app.post('/recipes', (req, res) => {
 });
 
 // Lire toutes les recettes
-app.get('/recipes', (req, res) => {
+app.get('api/recipes', (req, res) => {
     res.json(recipes);
 });
 
 // Lire une recette par ID
-app.get('/recipes/:id', (req, res) => {
+app.get('api/recipes/:id', (req, res) => {
     const recipe = recipes.find(r => r.id === req.params.id);
     if (!recipe) return res.status(404).json({ error: 'Recette non trouvée' });
     res.json(recipe);
 });
 
 // Modifier une recette
-app.put('/recipes/:id', (req, res) => {
+app.put('api/recipes/:id', (req, res) => {
     const { id } = req.params;
     const { title, description, ingredients, steps, duration, difficulty } = req.body;
 
@@ -54,7 +54,7 @@ app.put('/recipes/:id', (req, res) => {
 });
 
 // Supprimer une recette
-app.delete('/recipes/:id', (req, res) => {
+app.delete('api/recipes/:id', (req, res) => {
     const { id } = req.params;
     const index = recipes.findIndex(r => r.id === id);
     if (index === -1) return res.status(404).json({ error: 'Recette non trouvée' });
