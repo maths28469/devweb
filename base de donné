@@ -21,7 +21,7 @@ CREATE TABLE recipes (
     FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur)
 );
 /*donné a inserer pour test*/
-INSERT INTO recette (id_recette , nom_recette , description , categorie , temps_preparation , photo, difficulte) VALUES
+INSERT INTO recipes (id , title , description , categorie , ingredients , steps, duration, difficulty, photo) VALUES
 (1, 'Soupe de legume', 'Une soupe de légume qui saura vous régaler. Un plat pour 4 personnes qui se prepare avec les ingredients suivants',  'une entree', 'de la patate,tomate,courge,carrote,oignons,poirot,aubergine.', 'Coupez les différents légumes. Puis tout mettre dans casserole avec eau et laissez chauffer', '00:40:00','normale','https://lescocottesencuisine.fr/wp-content/uploads/2021/12/soupe-de-legumes-a-la-cocotte-minute-rapide.jpg'),
 (2, 'Riz poulet curry', 'Un riz qui se fait avec une sauce poulet curry. Plat pour 2 perssone qui a pour indredient:','un plat', '300g de blanc de poulet, du curry en poudre et de la creme fraiche. Le temps de preparaton inclut la cuisson du riz.', 'Couper en dé le poulet. Soupoudrez le de curry en poudre et laissez cuire à la poele',  '00:45:00', 'facile', 'https://cdn.chefclub.tools/uploads/recipes/cover-thumbnail/f287b191-dc8e-4c85-bbb6-e26387c354d3.jpg'),
 (3, 'cookies chocolat', 'De bon cookies qui sont fait avec les ingredients suivants:', 'desset', 'de la farine, du beurre, du chocolat, du sucre.', 'Melanger la farine avec du sucre du chocolat et du beure pour faire une pate. Puis utiliser la pate pour faire les coockies que vous mettrez dans le fur', '00:30:00', 'difficile', 'https://assets.afcdn.com/recipe/20190529/93153_w1024h576c1cx2220cy1728cxt0cyt0cxb4441cyb3456.jpg');
