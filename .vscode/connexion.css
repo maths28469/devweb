@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #FFF3E6, #FFE5B4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: 
+        url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.5 0 6.5-2.5 6.5-6.5S14.5 5 11 5 4.5 7.5 4.5 11 7.5 18 11 18zm0 0c1.5 0 3-.5 4.5-1.5' stroke='%23F5D4A0' fill='none' stroke-width='1.5'/%3E%3Cpath d='M90 50c0 22.1-17.9 40-40 40S10 72.1 10 50 27.9 10 50 10s40 17.9 40 40zM20 50c0 16.6 13.4 30 30 30s30-13.4 30-30S66.6 20 50 20 20 33.4 20 50z' fill='%23F5D4A0'/%3E%3C/svg%3E"),
+        linear-gradient(135deg, #FFF3E6, #FFE5B4);
+    background-blend-mode: overlay;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 40px;
+    width: 400px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 150px;
+    height: 150px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23FFA500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 13l3 3L22 7"/><path d="M16 6l2 2 4-4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>') no-repeat;
+    background-size: cover;
+    opacity: 0.2;
+    transform: rotate(-45deg);
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: #FF6B35;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #E0E0E0;
+    border-radius: 25px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #FF6B35;
+    box-shadow: 0 0 8px rgba(255, 107, 53, 0.2);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #FF6B35;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #FF8B4D;
+}
+
+.switch-form {
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+.switch-form a {
+    color: #FF6B35;
+    text-decoration: none;
+}
