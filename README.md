@@ -50,11 +50,11 @@ o	Supprimer son compte.
  
 2. formulaireCreeRecettes : page ou l'on peut rajouter des recettes
 
-3.
+3. style.css : pour epurer la page html tout en ayant le bon style sur notre pageprincipale.html
 
-4. 
+4. backend.js : coté serveur 
 
-5. 
+5. front.js : coté interface utilisateur
 6. 
 7. 
 

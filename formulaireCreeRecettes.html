@@ -184,6 +184,38 @@
         <!-- Bouton pour soumettre le formulaire -->
         <button type="submit">Enregistrer la recette</button>
     </form>
+    <script>
+        document.getElementById('recipe-form').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Empêche le rechargement de la page
+
+            // Récupère les données du formulaire
+            const formData = new FormData(event.target);
+            const recipe = {
+                id: formData.get('recipe-id'),
+                title: formData.get('title'),
+                description: formData.get('description'),
+                ingredients: formData.get('ingredients'),
+                steps: formData.get('steps'),
+                duration: formData.get('duration'),
+                difficulty: formData.get('difficulty'),
+                image: formData.get('photo') ? URL.createObjectURL(formData.get('photo')) : null // Gère l'image
+            };
+
+            // Envoie les données au serveur
+            const response = await fetch('http://localhost:3000/recipes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(recipe)
+            });
+
+            if (response.ok) {
+                alert('Recette ajoutée avec succès');
+                window.location.href = 'index.html'; // Redirige vers la page principale
+            } else {
+                alert('Erreur lors de l\'ajout de la recette');
+            }
+        });
+    </script>
 
 </body>
 
