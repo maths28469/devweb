@@ -1,5 +1,5 @@
 
-//2eme version
+/*2eme version*/
 
 CREATE TABLE Utilisateur (
     id_utilisateur INT PRIMARY KEY,
@@ -12,9 +12,14 @@ CREATE TABLE Recette (
     nom_recette VARCHAR(100),
     description VARCHAR(3000),
     categorie VARCHAR(100),
-    temps_preparation DATE,
+    temps_preparation TIME,
     photo VARCHAR(1000),
     difficulte VARCHAR(100),
     id_utilisateur INT,
     FOREIGN KEY (id_utilisateur) REFERENCES Utilisateur(id_utilisateur)
 );
+/*donné a inserer pour test*/
+INSERT INTO recette (id_recette , nom_recette , description , categorie , temps_preparation , photo, difficulte) VALUES
+(1, 'Soupe de legume', 'Une soupe qui se prepare avec pour ingredients de la patate,tomate,courge,carrote,oignons,poirot,aubergine. Un plat pour 4 personnes.', 'une entree', '00:40:00','https://lescocottesencuisine.fr/wp-content/uploads/2021/12/soupe-de-legumes-a-la-cocotte-minute-rapide.jpg' ,'normale'),
+(2, 'Riz poulet curry', 'Un riz qui se fait avec une sauce poulet curry qui a pour indredient 300g de blanc de poulet, du curry en poudre et de la creme fraiche. Le temps de preparaton inclut la cuisson du riz. Plat pour 2 perssone', 'un plat', '00:45:00', 'https://cdn.chefclub.tools/uploads/recipes/cover-thumbnail/f287b191-dc8e-4c85-bbb6-e26387c354d3.jpg', 'facile'),
+(3, 'cookies chocolat', 'De bon cookies qui sont fait avec de la farine, du beurre, du chocolat, du sucre.', 'desset', '00:30:00', 'https://assets.afcdn.com/recipe/20190529/93153_w1024h576c1cx2220cy1728cxt0cyt0cxb4441cyb3456.jpg','difficile');
