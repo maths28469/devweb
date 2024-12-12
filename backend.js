@@ -38,9 +38,11 @@ app.put('/recipes/:id', (req, res) => {
     const { id } = req.params;
     const { title, description, ingredients, steps, duration, difficulty } = req.body;
 
+    //recherche de la recette a modifier
     const recipe = recipes.find(r => r.id === id);
     if (!recipe) return res.status(404).json({ error: 'Recette non trouvée' });
 
+    //maj des champs
     recipe.title = title;
     recipe.description = description;
     recipe.ingredients = ingredients;
@@ -65,3 +67,4 @@ app.delete('/recipes/:id', (req, res) => {
 app.listen(port, () => {
     console.log(`Serveur démarré sur http://localhost:${port}`);
 });
+
