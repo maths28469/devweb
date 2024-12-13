@@ -5,6 +5,7 @@
 - Reda
 - Rachid
 - Ismael
+- Alexandre
 - Mathis
 
 ## Table of Contents
